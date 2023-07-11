@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +27,5 @@ export class ShoppingService {
     this.ingredientsChanged.emit(this.ingredients.slice());
   }
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 }
