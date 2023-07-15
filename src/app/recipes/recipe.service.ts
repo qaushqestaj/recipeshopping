@@ -10,22 +10,29 @@ import { Subject } from 'rxjs';
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Pits Burger',
-      'A mixture of cheese and Pits meat - simply delicious!',
-      'https://realfood.tesco.com/media/images/1400x919-Tesco-DinnerFor2-FridgeRaidFeasts-16024-BaconMushroomBreakfastHash-2ae2ffa1-7392-4e89-80f6-be2d7dd16de3-0-1400x919.jpg',
-      [new Ingredient('Meat', 2), new Ingredient('Cheese', 2)]
-    ),
-    new Recipe(
-      'Cheesy Burger',
-      'The name says it all.',
-      'https://realfood.tesco.com/media/images/1400x919-Tesco-DinnerFor2-FridgeRaidFeasts-16024-BaconMushroomBreakfastHash-2ae2ffa1-7392-4e89-80f6-be2d7dd16de3-0-1400x919.jpg',
-      [new Ingredient('Cheese', 2), new Ingredient('Another kind of cheese', 3)]
-    ),
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Pits Burger',
+  //     'A mixture of cheese and Pits meat - simply delicious!',
+  //     'https://realfood.tesco.com/media/images/1400x919-Tesco-DinnerFor2-FridgeRaidFeasts-16024-BaconMushroomBreakfastHash-2ae2ffa1-7392-4e89-80f6-be2d7dd16de3-0-1400x919.jpg',
+  //     [new Ingredient('Meat', 2), new Ingredient('Cheese', 2)]
+  //   ),
+  //   new Recipe(
+  //     'Cheesy Burger',
+  //     'The name says it all.',
+  //     'https://realfood.tesco.com/media/images/1400x919-Tesco-DinnerFor2-FridgeRaidFeasts-16024-BaconMushroomBreakfastHash-2ae2ffa1-7392-4e89-80f6-be2d7dd16de3-0-1400x919.jpg',
+  //     [new Ingredient('Cheese', 2), new Ingredient('Another kind of cheese', 3)]
+  //   ),
+  // ];
+
+  private recipes: Recipe[] = [];
 
   constructor(private slcService: ShoppingService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();
